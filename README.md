@@ -14,6 +14,8 @@ python3 -m venv env
 pip install -r requirements.txt
 ```
 
+-Create .env file in root folder and copy from .env.sample file.
+
 # Run the data migrations
 
 ```bash
