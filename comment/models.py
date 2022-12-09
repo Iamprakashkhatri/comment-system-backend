@@ -23,7 +23,7 @@ class Reply(models.Model):
 
     class Meta:
         verbose_name = "Reply"
-        verbose_name_plural = "Reply"
+        verbose_name_plural = "Replies"
 
 
     def __str__(self):
