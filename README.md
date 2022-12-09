@@ -29,3 +29,11 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+
+# Running the test cases
+
+- To run the test cases
+
+```bash
+python manage.py test
+```
