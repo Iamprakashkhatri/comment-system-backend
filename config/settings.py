@@ -25,12 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY", cast=str, default="django-insecure$config.settings.local")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-ALLOWED_HOSTS = ['localhost','khatri.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -43,11 +43,12 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
     "user",
-    "comment"
+    "comment",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
@@ -134,6 +135,8 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
+
+    "DEFAULT_PAGINATION_CLASS": "config.pagination.CustomPageNumberPagination",
     
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
