@@ -9,7 +9,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id","username","email")
+        fields = ("id","username","email", "first_name","last_name")
 
 class UserAuthTokenSerializer(AuthTokenSerializer):
     username = serializers.CharField(label=_("Username"), write_only=True, required=False)
@@ -33,3 +33,17 @@ class UserAuthTokenSerializer(AuthTokenSerializer):
         attrs["user"] = user
         return attrs
 
+class UserRegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(min_length=8, write_only=True,required=True)
+    confirm_password = serializers.CharField(required=True)
+    class Meta:
+        model = User
+        fields = ("id","first_name","last_name","email","password","confirm_password")
+        
+
+    def validate(self, attrs):
+
+        if attrs['password'] != attrs['confirm_password']:
+                raise serializers.ValidationError('Passwords Did Not Match')
+        # attrs['user']=attrs
+        return attrs
